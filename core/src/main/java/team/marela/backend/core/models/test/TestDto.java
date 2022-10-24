@@ -10,6 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class TestDto {
-    private UUID uiid;
+    private UUID id;
     private String name;
 }
