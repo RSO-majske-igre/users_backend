@@ -1,4 +1,4 @@
-package si.fri.rso.stationcatalog.application;
+package team.marela.backend.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
-@SpringBootApplication
 @EnableAsync
+@SpringBootApplication(scanBasePackages = {"team.marela.backend", "team.marela.backend"})
 public class StationCatalogApplication {
 
 	public static void main(String[] args) {
