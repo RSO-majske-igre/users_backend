@@ -20,7 +20,7 @@
     <modules>
         <module>api</module>
         <module>database</module>
-        <module>services</module>
+        <module>core</module>
     </modules>
 
     <dependencies>
