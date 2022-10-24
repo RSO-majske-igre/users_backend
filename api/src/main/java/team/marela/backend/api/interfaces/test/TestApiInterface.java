@@ -1,4 +1,4 @@
-package team.marela.backend.api.interfaces;
+package team.marela.backend.api.interfaces.test;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
