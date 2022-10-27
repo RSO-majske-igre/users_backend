@@ -2,6 +2,7 @@ package team.marela.backend.api.endpoints.test;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.marela.backend.api.interfaces.test.TestApiInterface;
 import team.marela.backend.core.models.test.TestDto;
@@ -23,5 +24,10 @@ public class TestApi implements TestApiInterface {
         ).getId();
 
         return testService.getTestDto(uuid);
+    }
+
+    @PostMapping
+    public TestDto postTest(TestDto dto) {
+        return dto;
     }
 }

@@ -2,6 +2,7 @@ package team.marela.backend.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import team.marela.backend.core.exceptions.BadRequestException;
@@ -12,22 +13,33 @@ import team.marela.backend.core.exceptions.ForbiddenException;
 public class ExceptionApiHandler {
 
     @ExceptionHandler(value = {DataNotFoundException.class})
-    public ResponseEntity<ExceptionApiModel<Object>> handleDataNotFoundException(DataNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionApiModel<>(exception.getMessage(), HttpStatus.NOT_FOUND.value()));
+    public ResponseEntity<ExceptionApiModel> handleDataNotFoundException(DataNotFoundException exception) {
+        return generateResponseEntity(exception, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = {ForbiddenException.class})
-    public ResponseEntity<ExceptionApiModel<Object>> handleForbiddenException(ForbiddenException exception) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ExceptionApiModel<>(exception.getMessage(), HttpStatus.FORBIDDEN.value()));
+    public ResponseEntity<ExceptionApiModel> handleForbiddenException(ForbiddenException exception) {
+        return generateResponseEntity(exception, HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(value = {BadRequestException.class})
-    public ResponseEntity<ExceptionApiModel<Object>> handleBadRequestException(BadRequestException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionApiModel<>(exception.getMessage(), HttpStatus.BAD_REQUEST.value()));
+    @ExceptionHandler(value = {BadRequestException.class, MethodArgumentNotValidException.class})
+    public ResponseEntity<ExceptionApiModel> handleBadRequestException(Exception exception) {
+        return generateResponseEntity(exception, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<ExceptionApiModel<Object>> handleException(Exception exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionApiModel<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
+    public ResponseEntity<ExceptionApiModel> handleException(Exception exception) {
+        return generateResponseEntity(exception, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ResponseEntity<ExceptionApiModel> generateResponseEntity(Exception exception, HttpStatus status) {
+        return ResponseEntity.status(status).body(
+                ExceptionApiModel.builder()
+                        .exception(exception.getClass().getSimpleName())
+                        .exceptionNo(status.value())
+                        .exceptionMessage(exception.getMessage())
+                        .body(exception.getCause())
+                        .build()
+        );
     }
 }

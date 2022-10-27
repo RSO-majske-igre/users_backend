@@ -1,26 +1,17 @@
 package team.marela.backend.api.exceptions;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class ExceptionApiModel<T> {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ExceptionApiModel {
     private String exception;
+    private String exceptionMessage;
     private Integer exceptionNo;
-    private T body;
-
-    public ExceptionApiModel() {
-    }
-
-    public ExceptionApiModel(String exception, Integer exceptionNo) {
-        this.exception = exception;
-        this.exceptionNo = exceptionNo;
-    }
-
-    public ExceptionApiModel(String exception, Integer exceptionNo, T body) {
-        this.exception = exception;
-        this.exceptionNo = exceptionNo;
-        this.body = body;
-    }
+    private Object body;
 }
