@@ -10,10 +10,10 @@ import java.util.concurrent.Executor;
 
 @EnableAsync
 @SpringBootApplication(scanBasePackages = {"team.marela.backend", "team.marela.backend"})
-public class StationCatalogApplication {
+public class BackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StationCatalogApplication.class, args);
+        SpringApplication.run(BackendApplication.class, args);
     }
 
     @Bean
