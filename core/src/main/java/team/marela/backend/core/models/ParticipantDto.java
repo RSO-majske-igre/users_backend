@@ -9,7 +9,6 @@ import team.marela.backend.core.validators.NotNullUUIDValidationGroup;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
