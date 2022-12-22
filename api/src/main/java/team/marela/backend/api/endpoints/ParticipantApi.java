@@ -7,6 +7,8 @@ import team.marela.backend.api.interfaces.ParticipantApiInterface;
 import team.marela.backend.core.models.ParticipantDto;
 import team.marela.backend.core.services.ParticipantServices;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -33,5 +35,10 @@ public class ParticipantApi implements ParticipantApiInterface {
     @Override
     public ParticipantDto updateParticipant(ParticipantDto participant) {
         return participantServices.updateParticipant(participant);
+    }
+
+    @Override
+    public Set<ParticipantDto> findByIds(List<UUID> ids) {
+        return participantServices.findByIds(ids);
     }
 }

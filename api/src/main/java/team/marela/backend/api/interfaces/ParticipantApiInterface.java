@@ -13,6 +13,8 @@ import team.marela.backend.core.models.ParticipantDto;
 import team.marela.backend.core.validators.NotNullUUIDValidationGroup;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RequestMapping("/participants")
@@ -71,4 +73,7 @@ public interface ParticipantApiInterface {
             @Validated(NotNullUUIDValidationGroup.class)
             ParticipantDto participant
     );
+
+    @PutMapping("/find-by-ids")
+    Set<ParticipantDto> findByIds(@RequestBody List<UUID> ids);
 }

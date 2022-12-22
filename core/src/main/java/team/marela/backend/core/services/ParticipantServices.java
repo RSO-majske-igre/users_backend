@@ -14,7 +14,10 @@ import team.marela.backend.database.entities.ParticipantEntity;
 import team.marela.backend.database.repositories.DormRepository;
 import team.marela.backend.database.repositories.ParticipantRepository;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -81,6 +84,13 @@ public class ParticipantServices {
                         participantMapper.toEntity(dto)
                 )
         );
+    }
+
+    public Set<ParticipantDto> findByIds(List<UUID> ids) {
+        return
+                participantRepository.findByIdIn(ids).stream()
+                        .map(participantMapper::toDto)
+                        .collect(Collectors.toSet());
     }
 
     private DormEntity upsertDorm(DormEntity dormEntity) {
