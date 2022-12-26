@@ -32,6 +32,7 @@ public class ParticipantEntity extends BaseEntity {
     @JoinColumn(name = "dormId")
     private DormEntity dorm;
 
-//    @ManyToMany(mappedBy = "participants")
-//    private Set<EntryEntity> entries;
+    @ManyToOne
+    @JoinColumn(name = "address")
+    private AddressEntity address;
 }

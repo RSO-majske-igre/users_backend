@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
 
     <groupId>team.marela</groupId>
-    <artifactId>majskeigre-users</artifactId>
+    <artifactId>majskeigre-participants</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>majskeigre-users</name>
+    <name>majskeigre-participants</name>
     <description>Station catalog for RSO project</description>
 
     <modules>

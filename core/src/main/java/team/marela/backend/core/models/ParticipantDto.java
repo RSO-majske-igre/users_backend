@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import team.marela.backend.core.validators.NotNullUUIDValidationGroup;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -28,14 +29,20 @@ public class ParticipantDto {
     @NotEmpty
     private String phone;
 
-    @NotNull
-    @JsonIgnoreProperties(value = {
-            "participants"
-    })
-    private DormDto dorm;
 
-//    @JsonIgnoreProperties(value = {
-//            "participants"
-//    })
-//    private Set<EntryDto> entries;
+    private UUID dormId;
+    @NotNull
+    private String dormName;
+
+
+    private UUID addressId;
+
+    @NotEmpty
+    private String addressLine1;
+    private String addressLine2;
+    @NotEmpty
+
+    private String addressCity;
+    @NotEmpty
+    private String addressPostalCode;
 }
