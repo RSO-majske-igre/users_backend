@@ -11,6 +11,7 @@ import team.marela.backend.core.mappers.DtoMapper;
 import team.marela.backend.core.models.ParticipantDto;
 import team.marela.backend.database.entities.DormEntity;
 import team.marela.backend.database.entities.ParticipantEntity;
+import team.marela.backend.database.repositories.AddressRepository;
 import team.marela.backend.database.repositories.DormRepository;
 import team.marela.backend.database.repositories.ParticipantRepository;
 
@@ -25,6 +26,7 @@ public class ParticipantServices {
 
     private final ParticipantRepository participantRepository;
     private final DormRepository dormRepository;
+    private final AddressRepository addressRepository;
 
     private final DtoMapper<ParticipantEntity, ParticipantDto> participantMapper = new DtoMapper<>(ParticipantEntity.class, ParticipantDto.class);
 
@@ -71,17 +73,22 @@ public class ParticipantServices {
      */
     public ParticipantDto saveParticipant(ParticipantDto dto) {
         var entity = participantMapper.toEntity(dto);
-        var dorm = upsertDorm(entity.getDorm());
-        entity.setDorm(dorm);
         return participantMapper.toDto(
-                participantRepository.save(entity)
+                participantRepository.save(
+                        entity
+                                .setDorm(upsertDorm(entity.getDorm()))
+                                .setAddress(addressRepository.save(entity.getAddress()))
+                )
         );
     }
 
     public ParticipantDto updateParticipant(ParticipantDto dto) {
+        var entity =  participantMapper.toEntity(dto);
         return participantMapper.toDto(
                 participantRepository.save(
-                        participantMapper.toEntity(dto)
+                        entity
+                                .setDorm(upsertDorm(entity.getDorm()))
+                                .setAddress(addressRepository.save(entity.getAddress()))
                 )
         );
     }
