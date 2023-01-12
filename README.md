@@ -1,6 +1,6 @@
 # Users Backend
 
-Payments backend microservice stores data about all payments and creates payment requests in external source (Stripe).
+Users backend microservice stores data about users.
 
 ## Production version
 
